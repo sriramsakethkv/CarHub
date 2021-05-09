@@ -1,0 +1,43 @@
+<template>
+    <lightning-card title='Filter' icon-name="standard:calibration">
+            <div class="slds-m-horizontal_medium">
+                <lightning-input label="Search Key" 
+                type='search' onchange={handleSearchKeyChange} value={filters.searchKey}></lightning-input>
+                <!--slider section-->
+                <section class='Slider Section'>
+                    <lightning-slider label="Max Price" step="100" max="999999" min="0" onchange={handleMaxPriceChange}
+                    value={filters.maxPrice}></lightning-slider>
+                </section>
+
+                <!--Category section-->
+                <section class='slds-var-m-bottom_medium Category'>
+                    <h2>Category</h2>
+                    <template if:true={categoryData.data}>
+                        <template for:each={categoryData.data.values} for:item="category">
+                            <lightning-input key={category.label}
+                            label={category.label}
+                            data-name='categories'
+                            data-value={category.value}
+                            type='checkbox' checked
+                            onchange={handleCheckbox}></lightning-input>
+                        </template>
+                    </template>
+                </section>
+
+                <!--Make Type section-->
+                <section class='Make'>
+                    <h2>Make</h2>
+                    <template if:true={makeTypeData.data}>
+                        <template for:each={makeTypeData.data.values} for:item="make">
+                            <lightning-input key={make.label}
+                            label={make.label}
+                            data-name='makeTypes'
+                            data-value={make.value}
+                            type='checkbox' checked
+                            onchange={handleCheckbox}></lightning-input>
+                        </template>
+                    </template>
+                </section>
+            </div>
+    </lightning-card>
+</template>
