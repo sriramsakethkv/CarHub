@@ -7,6 +7,7 @@ import CAR_SELECTED from '@salesforce/messageChannel/CarSelected__c'
 import { publish,subscribe,MessageContext } from 'lightning/messageService'
 
 export default class CarTileList extends LightningElement {
+//carId
     cars=[]
     error
     filters = {}
@@ -37,14 +38,12 @@ export default class CarTileList extends LightningElement {
         this.filters = {...message.filters}
     }
 
-    //publishing the selected car
-    //Handle Car click event
-
     handleClick(event){
+//        this.carId = event.detail
         publish(this.messageContext,CAR_SELECTED,{
             selection : event.detail
         })
         console.log('car is',event.detail)
+        console.log('data is', this.template.querySelectorAll('c-car-tile'))
     }
-
 }

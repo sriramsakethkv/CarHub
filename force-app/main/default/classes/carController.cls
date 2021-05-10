@@ -45,4 +45,10 @@ public with sharing class carController {
         String query = 'select Id,Name,MSRP__c,Category__c,Make__c,Picture_URL__c FROM car__c '+whereClause + ' WITH SECURITY_ENFORCED' + ' ORDER BY Name';
         return Database.query(query);
     }
+
+    @AuraEnabled
+    public static list<Car__c> getSimilarCars(Id carId,String makeType){
+
+        return [SELECT Id,Name,MSRP__c,Category__c,Make__c,Picture_URL__c,Description__c FROM car__c WHERE Make__c =:makeType AND ID != :carId];
+    }
 }
